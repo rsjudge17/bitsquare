@@ -57,7 +57,7 @@ public class BitsquareEnvironment extends StandardEnvironment {
         DEFAULT_APP_NAME = defaultAppName;
     }
 
-    public static String DEFAULT_APP_NAME = "Bitsquare";
+    public static String DEFAULT_APP_NAME = "CoiniVox";
 
     public static final String DEFAULT_USER_DATA_DIR = defaultUserDataDir();
     public static final String DEFAULT_APP_DATA_DIR = appDataDir(DEFAULT_USER_DATA_DIR, DEFAULT_APP_NAME);
@@ -194,7 +194,7 @@ public class BitsquareEnvironment extends StandardEnvironment {
     }
 
     private Resource getAppDirPropertiesResource() {
-        String location = String.format("file:%s/bitsquare.properties", appDataDir);
+        String location = String.format("file:%s/coinivox.properties", appDataDir);
         return resourceLoader.getResource(location);
     }
 
@@ -208,7 +208,7 @@ public class BitsquareEnvironment extends StandardEnvironment {
     }
 
     private PropertySource<?> homeDirProperties() throws Exception {
-        String location = String.format("file:%s/.bitsquare/bitsquare.properties", getProperty("user.home"));
+        String location = String.format("file:%s/.bitsquare/coinivox.properties", getProperty("user.home"));
         Resource resource = resourceLoader.getResource(location);
 
         if (!resource.exists())
@@ -218,7 +218,7 @@ public class BitsquareEnvironment extends StandardEnvironment {
     }
 
     private PropertySource<?> classpathProperties() throws Exception {
-        Resource resource = resourceLoader.getResource("classpath:bitsquare.properties");
+        Resource resource = resourceLoader.getResource("classpath:coinivox.properties");
         return new ResourcePropertySource(BITSQUARE_CLASSPATH_PROPERTY_SOURCE_NAME, resource);
     }
 

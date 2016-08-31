@@ -108,7 +108,7 @@ public class BitsquareApp extends Application {
     public void start(Stage stage) throws IOException {
         BitsquareApp.primaryStage = stage;
 
-        String logPath = Paths.get(env.getProperty(CoreOptionKeys.APP_DATA_DIR_KEY), "bitsquare").toString();
+        String logPath = Paths.get(env.getProperty(CoreOptionKeys.APP_DATA_DIR_KEY), "coinivox").toString();
         Log.setup(logPath);
         log.info("Log files under: " + logPath);
         Version.printVersion();
