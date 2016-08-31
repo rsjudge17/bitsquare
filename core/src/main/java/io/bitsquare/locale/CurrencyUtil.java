@@ -53,6 +53,8 @@ public class CurrencyUtil {
         list.add(new FiatCurrency("RUB"));
         list.add(new FiatCurrency("INR"));
 
+        list.sort(TradeCurrency::compareTo);
+
         TradeCurrency defaultTradeCurrency = getDefaultTradeCurrency();
         FiatCurrency defaultFiatCurrency = defaultTradeCurrency instanceof FiatCurrency ? (FiatCurrency) defaultTradeCurrency : null;
         if (defaultFiatCurrency != null && list.contains(defaultFiatCurrency)) {
@@ -141,10 +143,23 @@ public class CurrencyUtil {
         result.add(new CryptoCurrency("USDT", "USD Tether"));
         result.add(new CryptoCurrency("EURT", "EUR Tether"));
         result.add(new CryptoCurrency("JPYT", "JPY Tether"));
+        result.add(new CryptoCurrency("SYNX", "Syndicate"));
         result.add(new CryptoCurrency("WDC", "Worldcoin"));
         result.add(new CryptoCurrency("DAO", "DAO", true));
         result.add(new CryptoCurrency("CMT", "Comet"));
         result.add(new CryptoCurrency("SYNQ", "BitSYNQ"));
+        result.add(new CryptoCurrency("LBC", "LBRY Credits"));
+        result.add(new CryptoCurrency("HNC", "HunCoin"));
+        result.add(new CryptoCurrency("UNO", "Unobtanium"));
+        result.add(new CryptoCurrency("DGB", "Digibyte"));
+        result.add(new CryptoCurrency("VCN", "VCoin"));
+        result.add(new CryptoCurrency("DCR", "Decred"));
+        result.add(new CryptoCurrency("CBX", "Crypto Bullion"));
+        result.add(new CryptoCurrency("1CR", "1CRedit"));
+        result.add(new CryptoCurrency("YACC", "YACCoin"));
+        result.add(new CryptoCurrency("AIB", "Advanced Internet Blocks"));
+        
+        result.sort(TradeCurrency::compareTo);
         return result;
     }
 
@@ -166,6 +181,8 @@ public class CurrencyUtil {
         result.add(new CryptoCurrency("DOGE", "Dogecoin"));
         result.add(new CryptoCurrency("NXT", "Nxt"));
         result.add(new CryptoCurrency("BTS", "BitShares"));
+
+        result.sort(TradeCurrency::compareTo);
         return result;
     }
 
@@ -181,7 +198,7 @@ public class CurrencyUtil {
 
     // At OKPay you can exchange internally those currencies
     public static List<TradeCurrency> getAllOKPayCurrencies() {
-        return new ArrayList<>(Arrays.asList(
+        ArrayList<TradeCurrency> currencies = new ArrayList<>(Arrays.asList(
                 new FiatCurrency("EUR"),
                 new FiatCurrency("USD"),
                 new FiatCurrency("GBP"),
@@ -204,6 +221,8 @@ public class CurrencyUtil {
                 new FiatCurrency("HKD"),
                 new FiatCurrency("CNY")
         ));
+        currencies.sort(TradeCurrency::compareTo);
+        return currencies;
     }
 
     public static boolean isFiatCurrency(String currencyCode) {

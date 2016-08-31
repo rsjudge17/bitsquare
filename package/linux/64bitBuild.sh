@@ -6,7 +6,7 @@ mkdir -p gui/deploy
 set -e
 
 # Edit version
-version=0.4.9.3
+version=0.4.9.5
 
 jarFile="/media/sf_vm_shared_ubuntu/Bitsquare-$version.jar"
 jdkfixFile="/media/sf_vm_shared_ubuntu/jdkfix-$version.jar"
@@ -32,6 +32,7 @@ $JAVA_HOME/bin/javapackager \
     -appclass io.bitsquare.app.BitsquareAppMain \
     -outfile Bitsquare
 
+# uncomment because the build VM does not support alien
 #sudo alien -r -c -k gui/deploy/bundles/bitsquare-$version.deb
 
 mv "gui/deploy/bundles/bitsquare-$version.deb" "/media/sf_vm_shared_ubuntu/Bitsquare-64bit-$version.deb"

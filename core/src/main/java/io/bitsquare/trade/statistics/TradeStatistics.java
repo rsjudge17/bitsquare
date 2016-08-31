@@ -11,6 +11,8 @@ import io.bitsquare.trade.offer.Offer;
 import org.bitcoinj.core.Coin;
 import org.bitcoinj.utils.ExchangeRate;
 import org.bitcoinj.utils.Fiat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.concurrent.Immutable;
 import java.security.PublicKey;
@@ -21,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 
 @Immutable
 public final class TradeStatistics implements LazyProcessedStoragePayload, CapabilityRequiringPayload, PersistedStoragePayload {
+    private static final Logger log = LoggerFactory.getLogger(TradeStatistics.class);
+
     @JsonExclude
     private static final long serialVersionUID = Version.P2P_NETWORK_VERSION;
     @JsonExclude
@@ -116,7 +120,7 @@ public final class TradeStatistics implements LazyProcessedStoragePayload, Capab
             return false;
         else if ((direction == null && that.direction != null) || (direction != null && that.direction == null))
             return false;
-        
+
         if (paymentMethod != null ? !paymentMethod.equals(that.paymentMethod) : that.paymentMethod != null)
             return false;
         if (offerId != null ? !offerId.equals(that.offerId) : that.offerId != null) return false;

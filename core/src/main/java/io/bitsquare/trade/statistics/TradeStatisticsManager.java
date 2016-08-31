@@ -55,14 +55,15 @@ public class TradeStatisticsManager {
 
             this.fiatCurrencyListJsonStorage.initWithFileName("fiat_currency_list.json");
             ArrayList<CurrencyTuple> fiatCurrencyList = new ArrayList<>(CurrencyUtil.getAllSortedFiatCurrencies().stream()
-                    .map(e -> new CurrencyTuple(e.getCode(), e.getName()))
+                    .map(e -> new CurrencyTuple(e.getCode(), e.getName(), 8))
                     .collect(Collectors.toList()));
             fiatCurrencyListJsonStorage.queueUpForSave(new PlainTextWrapper(Utilities.objectToJson(fiatCurrencyList)), 2000);
 
             this.cryptoCurrencyListJsonStorage.initWithFileName("crypto_currency_list.json");
             ArrayList<CurrencyTuple> cryptoCurrencyList = new ArrayList<>(CurrencyUtil.getAllSortedCryptoCurrencies().stream()
-                    .map(e -> new CurrencyTuple(e.getCode(), e.getName()))
+                    .map(e -> new CurrencyTuple(e.getCode(), e.getName(), 8))
                     .collect(Collectors.toList()));
+            cryptoCurrencyList.add(0, new CurrencyTuple("BTC", "Bitcoin", 8));
             cryptoCurrencyListJsonStorage.queueUpForSave(new PlainTextWrapper(Utilities.objectToJson(cryptoCurrencyList)), 2000);
         }
 
@@ -119,9 +120,9 @@ public class TradeStatisticsManager {
             // Need a more scalable solution later when we get more volume.
             // The flag will only be activated by dedicated nodes, so it should not be too critical for the moment, but needs to
             // get improved. Maybe a LevelDB like DB...? Could be impl. in a headless version only.
-            List<TradeStatistics> list = tradeStatisticsSet.stream().collect(Collectors.toList());
+            List<TradeStatisticsForJson> list = tradeStatisticsSet.stream().map(TradeStatisticsForJson::new).collect(Collectors.toList());
             list.sort((o1, o2) -> (o1.tradeDate < o2.tradeDate ? 1 : (o1.tradeDate == o2.tradeDate ? 0 : -1)));
-            TradeStatistics[] array = new TradeStatistics[tradeStatisticsSet.size()];
+            TradeStatisticsForJson[] array = new TradeStatisticsForJson[list.size()];
             list.toArray(array);
             statisticsJsonStorage.queueUpForSave(new PlainTextWrapper(Utilities.objectToJson(array)), 5000);
         }
